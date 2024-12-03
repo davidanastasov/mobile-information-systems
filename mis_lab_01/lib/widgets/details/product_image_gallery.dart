@@ -19,7 +19,7 @@ class _ProductImageGalleryState extends State<ProductImageGallery> {
   }
 
   void selectFirstImage() async {
-    selectedImage = widget.images.last;
+    selectedImage = widget.images.first;
   }
 
   @override
