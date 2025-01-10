@@ -40,9 +40,6 @@ class _RandomJokeState extends State<RandomJoke> {
             ? const Center(child: CircularProgressIndicator())
             : Center(
                 child: SizedBox(
-                    width: 320,
-                    height: 450,
-                    child: JokeCard(
-                        setup: joke!.setup, punchline: joke!.punchline))));
+                    width: 320, height: 450, child: JokeCard(joke: joke!))));
   }
 }

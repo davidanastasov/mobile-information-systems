@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mis_lab_03/screens/favourite.dart';
 import 'package:mis_lab_03/screens/home.dart';
 import 'package:mis_lab_03/screens/jokes.dart';
 import 'package:mis_lab_03/screens/random_joke.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const Home(),
         '/jokes': (context) => const Jokes(),
         '/random': (context) => const RandomJoke(),
+        '/favorite': (context) => const Favorite(),
       },
     );
   }

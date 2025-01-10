@@ -47,7 +47,7 @@ class _JokesState extends State<Jokes> {
           : Swiper(
               itemBuilder: (context, index) {
                 final joke = jokes![index];
-                return JokeCard(setup: joke.setup, punchline: joke.punchline);
+                return JokeCard(joke: joke);
               },
               itemCount: jokes!.length,
               itemWidth: 350,

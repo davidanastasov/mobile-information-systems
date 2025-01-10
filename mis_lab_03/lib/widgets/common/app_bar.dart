@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final bool randomJokeButton;
+  final bool showActionButtons;
 
   const CustomAppBar(
-      {super.key, this.title = "JOKES", this.randomJokeButton = false});
+      {super.key, this.title = "JOKES", this.showActionButtons = false});
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +13,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       title: Text(title),
       centerTitle: true,
-      actions: randomJokeButton
+      actions: showActionButtons
           ? [
+              IconButton(
+                onPressed: () => {Navigator.pushNamed(context, '/favorite')},
+                icon: const Icon(
+                  Icons.favorite,
+                  color: Colors.redAccent,
+                  size: 24.0,
+                  semanticLabel: 'Favorite jokes',
+                ),
+              ),
               IconButton(
                 onPressed: () => {Navigator.pushNamed(context, '/random')},
                 icon: const Icon(

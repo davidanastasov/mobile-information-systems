@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
     final isLoading = types.isEmpty;
 
     return Scaffold(
-      appBar: const CustomAppBar(title: "Joke Cards", randomJokeButton: true),
+      appBar: const CustomAppBar(title: "Joke Cards", showActionButtons: true),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : JokeTypeGrid(types: types),
