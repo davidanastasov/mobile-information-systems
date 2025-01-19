@@ -5,4 +5,10 @@ class EventService {
   static List<Event> getEvents() {
     return eventsRawData.map((json) => Event.fromJson(json)).toList();
   }
+
+  static Event getEvent(int id) {
+    return eventsRawData
+        .map((json) => Event.fromJson(json))
+        .firstWhere((event) => event.id == id);
+  }
 }

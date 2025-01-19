@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mis_lab_04/screens/event_details.dart';
 import 'package:mis_lab_04/screens/events_calendar.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:mis_lab_04/screens/events_map.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 
 void main() {
@@ -30,6 +32,8 @@ class MyApp extends StatelessWidget {
       initialRoute: "/calendar",
       routes: {
         "/calendar": (context) => const EventsCalendar(),
+        "/map": (context) => const EventsMap(),
+        "/details": (context) => const EventDetails(),
       },
     );
   }

@@ -21,6 +21,12 @@ class _EventsCalendarState extends State<EventsCalendar> {
         title: const Text("Календар"),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: _navigateToMapView,
+            icon: const Icon(Icons.map),
+          )
+        ],
       ),
       body: SfCalendar(
         view: CalendarView.schedule,
@@ -39,6 +45,12 @@ class _EventsCalendarState extends State<EventsCalendar> {
           CalendarView.day,
           CalendarView.schedule
         ],
+        onTap: (CalendarTapDetails details) {
+          if (details.targetElement == CalendarElement.appointment) {
+            final Appointment appointment = details.appointments!.first;
+            _navigateToEventDetails(appointment.id);
+          }
+        },
         appointmentBuilder:
             (BuildContext context, CalendarAppointmentDetails details) {
           final Appointment appointment = details.appointments.first;
@@ -54,8 +66,6 @@ class _EventsCalendarState extends State<EventsCalendar> {
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
                     borderRadius: const BorderRadius.all(Radius.circular(5)),
-                    // topLeft: Radius.circular(5),
-                    // topRight: Radius.circular(5)),
                     color: appointment.color,
                   ),
                   child: SingleChildScrollView(
@@ -70,8 +80,6 @@ class _EventsCalendarState extends State<EventsCalendar> {
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                         ),
-                        // maxLines: 3,
-                        // softWrap: false,
                         overflow: TextOverflow.ellipsis,
                       ),
                       Row(
@@ -82,7 +90,6 @@ class _EventsCalendarState extends State<EventsCalendar> {
                               const Icon(Icons.access_time,
                                   color: Colors.white, size: 12),
                               const SizedBox(width: 2),
-                              // Add a small horizontal space
                               Text(
                                 '${DateFormat('HH:mm').format(appointment.startTime)} - ${DateFormat('HH:mm').format(appointment.endTime)}',
                                 style: const TextStyle(
@@ -93,13 +100,11 @@ class _EventsCalendarState extends State<EventsCalendar> {
                             ],
                           ),
                           const SizedBox(width: 12),
-                          // Add a small horizontal space
                           Row(
                             children: [
                               const Icon(Icons.location_pin,
                                   color: Colors.white, size: 12),
                               const SizedBox(width: 2),
-                              // Add a small horizontal space
                               Text(
                                 '${appointment.location}',
                                 style: const TextStyle(
@@ -122,6 +127,14 @@ class _EventsCalendarState extends State<EventsCalendar> {
         },
       ),
     );
+  }
+
+  void _navigateToEventDetails(Object? id) {
+    Navigator.pushNamed(context, '/details', arguments: id);
+  }
+
+  void _navigateToMapView() {
+    Navigator.pushNamed(context, '/map');
   }
 
   List<Appointment> _getDataSource() {
