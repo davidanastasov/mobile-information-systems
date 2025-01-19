@@ -29,7 +29,8 @@ class _EventsCalendarState extends State<EventsCalendar> {
         ],
       ),
       body: SfCalendar(
-        view: CalendarView.schedule,
+        controller: _controller,
+        view: CalendarView.month,
         showTodayButton: true,
         showNavigationArrow: true,
         dataSource: _EventDataSource(_getDataSource()),
@@ -55,8 +56,14 @@ class _EventsCalendarState extends State<EventsCalendar> {
             (BuildContext context, CalendarAppointmentDetails details) {
           final Appointment appointment = details.appointments.first;
 
-          if (_controller.view != CalendarView.month &&
-              _controller.view != CalendarView.schedule) {
+          final now = DateTime.now();
+          bool isEnded = appointment.endTime.isBefore(now);
+          double opacity =
+              isEnded && _controller.view == CalendarView.schedule ? 0.5 : 1.0;
+
+          if (_controller.view == CalendarView.month ||
+              _controller.view == CalendarView.schedule ||
+              _controller.view == CalendarView.day) {
             return Column(
               children: [
                 Container(
@@ -66,7 +73,7 @@ class _EventsCalendarState extends State<EventsCalendar> {
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
                     borderRadius: const BorderRadius.all(Radius.circular(5)),
-                    color: appointment.color,
+                    color: appointment.color.withOpacity(opacity),
                   ),
                   child: SingleChildScrollView(
                       child: Column(
