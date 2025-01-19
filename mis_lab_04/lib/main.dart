@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mis_lab_04/services/location_service.dart';
+import 'package:mis_lab_04/services/notification_service.dart';
 import 'package:mis_lab_04/screens/event_details.dart';
 import 'package:mis_lab_04/screens/events_calendar.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -7,6 +9,9 @@ import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 
 void main() {
   runApp(const MyApp());
+
+  NotificationService.initializeNotifications();
+  LocationService.initializeBackgroundGeolocation();
 }
 
 class MyApp extends StatelessWidget {
